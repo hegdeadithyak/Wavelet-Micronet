@@ -5,10 +5,9 @@ import os
 from pytorch_wavelets import DWTForward
 
 device="cpu"
-model_path="/content/wavelet_qat_out/best_qat_state.pth"
-onnx_path="/content/wavelet_model.onnx"
+model_path="/home/amma/i4c/wavelet_qat_out/best_qat_state.pth"
+onnx_path="./wavelet_model.onnx"
 
-# -------- ORIGINAL TRAINING MODEL --------
 class WaveletDownsample(nn.Module):
     def __init__(self):
         super().__init__()
@@ -88,11 +87,13 @@ class WaveletMicroNet(nn.Module):
         x=self.pool(x).flatten(1)
         return self.fc(x)
 
-# -------- LOAD MODEL --------
-model=WaveletMicroNet()
 
-# IMPORTANT: load with strict=False
 checkpoint=torch.load(model_path,map_location=device)
+
+num_classes_from_checkpoint = checkpoint["model_state_dict"]["fc.weight"].shape[0]
+
+model=WaveletMicroNet(num_classes=num_classes_from_checkpoint)
+
 model.load_state_dict(checkpoint["model_state_dict"],strict=False)
 
 model.eval()
@@ -100,7 +101,6 @@ model.cpu()
 
 print("Weights loaded successfully")
 
-# -------- EXPORT ONNX --------
 dummy=torch.randn(1,1,128,128)
 
 torch.onnx.export(
@@ -115,7 +115,6 @@ torch.onnx.export(
 
 print("ONNX saved:",onnx_path)
 
-# -------- VERIFY --------
 onnx_model=onnx.load(onnx_path)
 onnx.checker.check_model(onnx_model)
 print("ONNX verified")

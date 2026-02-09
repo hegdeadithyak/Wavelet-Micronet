@@ -248,6 +248,6 @@ def train_qat(data_root: str,
     print("Saved training history to", csv_path)
     print("Best val acc:", best_val_acc)
     return out_dir
-data_dir = "./Dataset"
+data_dir = "./dataset"
 
 out = train_qat(data_dir, out_dir="./wavelet_qat_out", epochs=25, batch_size=64, lr=1e-3)

@@ -6,10 +6,9 @@ from torchvision import datasets, transforms
 from torch.utils.data import DataLoader
 
 onnx_path = "./wavelet_model.onnx"
-data_dir  = "./dataset/test"
-batch_size = 1   
+data_dir  = "./dataset"
+batch_size = 1   # measure true latency per image
 img_size = 128
-
 
 sess = ort.InferenceSession(
     onnx_path,
@@ -31,15 +30,20 @@ test_loader = DataLoader(test_ds, batch_size=batch_size, shuffle=False)
 
 print("Test samples:", len(test_ds))
 
+
 correct = 0
 total = 0
 times = []
 
+# warmup
 for i,(x,y) in enumerate(test_loader):
     if i>20: break
     inp = x.numpy()
     sess.run(None,{input_name:inp})
 
+print("Warmup done")
+
+# timing
 for x,y in test_loader:
     inp = x.numpy()
 
@@ -64,7 +68,6 @@ print("TEST ACCURACY:", acc)
 print("Avg inference time per image: %.4f sec" % avg_time)
 print("FPS: %.2f" % fps)
 print("==============================")
-
 
 size_mb = os.path.getsize(onnx_path)/1024/1024
 print("ONNX model size: %.2f MB" % size_mb)
