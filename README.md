@@ -22,8 +22,8 @@ Semiconductor fabrication requires zero-error inspection, but traditional cloud-
 
 | Metric | WaveletMicroNet (Ours) | Standard ResNet-18 | Improvement |
 | :--- | :--- | :--- | :--- |
-| **Model Size** | **0.6 MB** | ~45.0 MB | **75x Smaller** |
-| **Inference Speed (CPU)** | **80 FPS** | ~15 FPS | **5.3x Faster** |
+| **Model Size** | **1.6 MB** | ~45.0 MB | **75x Smaller** |
+| **Inference Speed (CPU)** | **213 FPS** | ~15 FPS | **15x Faster** |
 | **Accuracy (Test)** | **98.5%** | 98.9% | Comparable |
 | **Compute Cost** | **INT8 (Quantized)** | FP32 (Float) | Low Power |
 
