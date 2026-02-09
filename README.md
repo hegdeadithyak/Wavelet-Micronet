@@ -14,7 +14,7 @@
 ## Summary
 Semiconductor fabrication requires zero-error inspection, but traditional cloud-based analysis suffers from high latency and bandwidth bottlenecks. 
 
-**WaveletMicroNet** is a purpose-built Edge AI solution that moves defect detection directly to the manufacturing line. By combining **Discrete Wavelet Transforms (DWT)** with **Quantization Aware Training (QAT)**, we achieve server-grade accuracy on embedded-grade hardware—running at **80 FPS** with a tiny **0.6MB** footprint.
+**WaveletMicroNet** is a purpose-built Edge AI solution that moves defect detection directly to the manufacturing line. By combining **Discrete Wavelet Transforms (DWT)** with **Quantization Aware Training (QAT)**, we achieve server-grade accuracy on embedded-grade hardware—running at **213 FPS** with a tiny **1.6MB** footprint.
 
 ---
 
