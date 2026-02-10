@@ -183,12 +183,6 @@ Edit the Python scripts to modify:
 
 ---
 
-## 📄 License
-
-MIT License - See LICENSE file for details
-
----
-
 ## 👥 Team
 
 **Team Name:** HuTLabs
